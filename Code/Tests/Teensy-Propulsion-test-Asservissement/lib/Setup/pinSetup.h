@@ -1,0 +1,23 @@
+#ifndef PINSETUP_H_
+#define PINSETUP_H_
+
+//Right Motor
+#define PIN_RIGHT_MOTOR_PWM 33
+#define PIN_RIGHT_MOTOR_IN1 34
+#define PIN_RIGHT_MOTOR_IN2 35
+
+//Left Motor
+#define PIN_LEFT_MOTOR_PWM 36
+#define PIN_LEFT_MOTOR_IN1 37
+#define PIN_LEFT_MOTOR_IN2 38
+
+#define PIN_CODEUSE_DROITE_A 26
+#define PIN_CODEUSE_DROITE_B 27
+
+#define PIN_CODEUSE_GAUCHE_A 28
+#define PIN_CODEUSE_GAUCHE_B 29
+
+#define PIN_ARRET_URGENCE 30
+
+
+#endif

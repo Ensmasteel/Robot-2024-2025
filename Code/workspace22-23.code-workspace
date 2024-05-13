@@ -1,0 +1,133 @@
+{
+	"folders": [
+		{
+			"name": "ESP32",
+			"path": "ESP32"
+		},
+		{
+			"name": "Teensy-Propulsion",
+			"path": "Teensy-Propulsion"
+		},
+		{
+			"name": "Mega-Actionneurs",
+			"path": "Mega-Actionneurs"
+		},
+		{
+			"name": "Librairies_Shared",
+			"path": "Librairies_Shared"
+		},
+		{
+			"name": "Tests",
+			"path": "Tests"
+		},
+		{
+			"name": "Test_Serial_Mega",
+			"path": "Tests/Test_Serial_Mega"
+		},
+		{
+			"name": "Test_Serial_Teensy",
+			"path": "Tests/Test_Serial_Teensy"
+		},
+		{
+			"name": "Test_Motor_Drivers_Teensy",
+			"path": "Tests/Test_Motor_Drivers_Teensy"
+		},
+		{
+			"name": "Test_Serial_ESP32",
+			"path": "Tests/Test_Serial_ESP32"
+		},
+		{
+			"name": "Test_Encoders_Teensy",
+			"path": "Tests/Test_Encoders_Teensy"
+		},
+		{
+			"name": "PropulsionNoThreads_Teensy",
+			"path": "Tests/PropulsionNoThreads_Teensy"
+		},
+		{
+			"name": "Test_Communication",
+			"path": "Tests/Test_Communication"
+		},
+		{
+			"name": "Test_teensythread",
+			"path": "Tests/Test_teensythread"
+		},
+		{
+			"name": "UDP_streaming_ESP32",
+			"path": "Tests/UDP_streaming_ESP32"
+		},
+		{
+			"name": "InfluxDB_datastreamingTEST_ESP32",
+			"path": "Tests/InfluxDB_datastreamingTEST_ESP32"
+		},
+		{
+			"name": "MQTT_Broker_and_Client_ESP32",
+			"path": "Tests/MQTT_Broker_and_Client_ESP32"
+		},
+		{
+			"name": "TestActionneursMega",
+			"path": "Tests/TestActionneursMega"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"typeinfo": "cpp",
+			"istream": "cpp",
+			"ostream": "cpp",
+			"array": "cpp",
+			"deque": "cpp",
+			"string": "cpp",
+			"unordered_map": "cpp",
+			"unordered_set": "cpp",
+			"vector": "cpp",
+			"string_view": "cpp",
+			"initializer_list": "cpp",
+			"atomic": "cpp",
+			"*.tcc": "cpp",
+			"cctype": "cpp",
+			"chrono": "cpp",
+			"clocale": "cpp",
+			"cmath": "cpp",
+			"condition_variable": "cpp",
+			"cstdarg": "cpp",
+			"cstddef": "cpp",
+			"cstdint": "cpp",
+			"cstdio": "cpp",
+			"cstdlib": "cpp",
+			"cstring": "cpp",
+			"ctime": "cpp",
+			"cwchar": "cpp",
+			"cwctype": "cpp",
+			"list": "cpp",
+			"exception": "cpp",
+			"algorithm": "cpp",
+			"any": "cpp",
+			"functional": "cpp",
+			"iterator": "cpp",
+			"map": "cpp",
+			"memory": "cpp",
+			"memory_resource": "cpp",
+			"numeric": "cpp",
+			"optional": "cpp",
+			"random": "cpp",
+			"ratio": "cpp",
+			"set": "cpp",
+			"system_error": "cpp",
+			"tuple": "cpp",
+			"type_traits": "cpp",
+			"utility": "cpp",
+			"fstream": "cpp",
+			"iomanip": "cpp",
+			"iosfwd": "cpp",
+			"iostream": "cpp",
+			"limits": "cpp",
+			"mutex": "cpp",
+			"new": "cpp",
+			"sstream": "cpp",
+			"stdexcept": "cpp",
+			"streambuf": "cpp",
+			"thread": "cpp",
+			"cinttypes": "cpp"
+		}
+	}
+}

@@ -1,0 +1,201 @@
+{
+   "widgets": [
+      {
+         "type": "chart",
+         "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "GHOST  x ",
+               "sourceNames": [
+                  "GHOST  x "
+               ],
+               "formula": "",
+               "options": {
+                  "_serie": "GHOST  x ",
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            },
+            {
+               "name": "ROBOT  x ",
+               "sourceNames": [
+                  "ROBOT  x "
+               ],
+               "formula": "",
+               "options": {
+                  "_serie": "ROBOT  x ",
+                  "stroke": "rgba(52,152,219,1)",
+                  "fill": "rgba(52,152,219,0.1)"
+               },
+               "type": "number"
+            }
+         ]
+      },
+      {
+         "type": "chart",
+         "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "GHOST  y ",
+               "sourceNames": [
+                  "GHOST  y "
+               ],
+               "formula": "",
+               "options": {
+                  "_serie": "GHOST  y ",
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            },
+            {
+               "name": "ROBOT  y ",
+               "sourceNames": [
+                  "ROBOT  y "
+               ],
+               "formula": "",
+               "options": {
+                  "_serie": "ROBOT  y ",
+                  "stroke": "rgba(52,152,219,1)",
+                  "fill": "rgba(52,152,219,0.1)"
+               },
+               "type": "number"
+            }
+         ]
+      },
+      {
+         "type": "chart",
+         "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "GHOST  xy ",
+               "sourceNames": [
+                  "GHOST  xy "
+               ],
+               "formula": "",
+               "options": {
+                  "_serie": "GHOST  xy ",
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "xy"
+            },
+            {
+               "name": "ROBOT  xy ",
+               "sourceNames": [
+                  "ROBOT  xy "
+               ],
+               "formula": "",
+               "options": {
+                  "_serie": "ROBOT  xy ",
+                  "stroke": "rgba(52,152,219,1)",
+                  "fill": "rgba(52,152,219,0.1)"
+               },
+               "type": "xy"
+            }
+         ]
+      },
+      {
+         "type": "chart",
+         "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "GHOST  Th ",
+               "sourceNames": [
+                  "GHOST  Th "
+               ],
+               "formula": "",
+               "options": {
+                  "_serie": "GHOST  Th ",
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            },
+            {
+               "name": "ROBOT  Th ",
+               "sourceNames": [
+                  "ROBOT  Th "
+               ],
+               "formula": "",
+               "options": {
+                  "_serie": "ROBOT  Th ",
+                  "stroke": "rgba(52,152,219,1)",
+                  "fill": "rgba(52,152,219,0.1)"
+               },
+               "type": "number"
+            }
+         ]
+      },
+      {
+         "type": "chart",
+         "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "ROBOT  v ",
+               "sourceNames": [
+                  "ROBOT  v "
+               ],
+               "formula": "",
+               "options": {
+                  "_serie": "ROBOT  v ",
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ]
+      },
+      {
+         "type": "chart",
+         "gridPos": {
+            "h": 6,
+            "w": 6,
+            "x": 0,
+            "y": 0
+         },
+         "series": [
+            {
+               "name": "ROBOT  w ",
+               "sourceNames": [
+                  "ROBOT  w "
+               ],
+               "formula": "",
+               "options": {
+                  "_serie": "ROBOT  w ",
+                  "stroke": "rgba(231,76,60,1)",
+                  "fill": "rgba(231,76,60,0.1)"
+               },
+               "type": "number"
+            }
+         ]
+      }
+   ],
+   "viewDuration": 15
+}

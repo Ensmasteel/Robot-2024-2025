@@ -1,0 +1,19 @@
+#ifndef PINSETUP_H_
+#define PINSETUP_H_
+
+#define PIN_CLAWS 2
+
+#define PIN_ELEVATOR_STEP 33
+#define PIN_ELEVATOR_DIR 35
+#define PIN_ELEVATOR_M0 37
+#define PIN_ELEVATOR_M1 39
+#define PIN_ELEVATOR_M2 41
+
+#define PIN_MAGNET 12
+
+#define PIN_SOLARLEFT 6
+#define PIN_SOLARRIGHT 4
+
+#define PIN_BOUTON_ECRANT 10
+
+#endif

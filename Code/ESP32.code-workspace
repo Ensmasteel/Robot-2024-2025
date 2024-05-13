@@ -1,0 +1,43 @@
+{
+	"folders": [
+		{
+			"path": "ESP32"
+		},
+		{
+			"name": "UDP_streaming_ESP32",
+			"path": "Tests/UDP_streaming_ESP32"
+		},
+		{
+			"name": "Mega-Actionneurs",
+			"path": "Mega-Actionneurs"
+		},
+		{
+			"name": "Teensy-Propulsion",
+			"path": "Teensy-Propulsion"
+		},
+		{
+			"name": "Teensy-Propulsion-test-Asservissement",
+			"path": "Tests/Teensy-Propulsion-test-Asservissement"
+		},
+		{
+			"name": "TestActionneursMega",
+			"path": "Tests/TestActionneursMega"
+		},
+		{
+			"path": "Librairies_Shared"
+		},
+		{
+			"name": "Test_Serial_Mega",
+			"path": "Tests/Test_Serial_Mega"
+		},
+		{
+			"name": "Test_Serial_Teensy",
+			"path": "Tests/Test_Serial_Teensy"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"iterator": "cpp"
+		}
+	}
+}
