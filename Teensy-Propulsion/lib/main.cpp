@@ -14,11 +14,11 @@
 Robot* robot;
 VectorOriented robotInitBleu(3.0f - 0.14f, 1.77f, PI);
 VectorOriented robotInitJaune(0.14f, 1.77f, 0.0f);
-VectorOriented robotInitBourre(0.0, 0.0f, 0.0f);
+VectorOriented robotInitZero(0.0, 0.0f, 0.0f);
 SequenceManager* brain;
 SequenceManager* brain_bleu;
 SequenceManager* brain_jaune;
-SequenceManager* brain_bourre;
+SequenceManager* brain_numeriexplore;
 
 Threads::Mutex tirrette_mut;
 
@@ -276,20 +276,39 @@ void setup() {
             new StaticAction(LOWER_CLAWS)
         }
     );
-        Sequence Brain_Bourre(
+    Sequence Brain_Numeriexplore(
         {
-            new MoveAction(VectorOriented( 1.50f,  0.0f,  0.0f), false, false, true, true),
+            new StaticAction(CLOSE_CLAWS,true),
+            new StaticAction(RAISE_CLAWS,true),
+            new MoveAction(VectorOriented( 0.30f,  0.0f,  0.0f), false, false, true, true),
+            new StaticAction(OPEN_CLAWS,true),
+            new StaticAction(LOWER_CLAWS),
+            new StaticAction(SOLAR_LEFT_ON,true),
+            new MoveAction(VectorOriented(0.30f,  0.0f, PI/4), true, false, true, true),
+            new StaticAction(SOLAR_LEFT_OFF),
+            new StaticAction(SOLAR_RIGHT_ON,true),
+            new MoveAction(VectorOriented(0.30f,  0.0f, -PI/4), true, false, true, true),
+            new StaticAction(SOLAR_RIGHT_OFF,true),
+            new MoveAction(VectorOriented( 0.30f,  0.0f,  PI), true, false, true, true),
+            new MoveAction(VectorOriented( 0.30f,  0.0f,  PI/4), true, false, true, true),
+            new MoveAction(VectorOriented( 0.30f,  0.0f,   0.0f), true, false, true, true),
+            new StaticAction(SOLAR_LEFT_ON,true),
+            new StaticAction(SOLAR_RIGHT_ON,true),
+            new MoveAction(VectorOriented( 0.00f,  0.0f,  0.0f), false, true, true, true),
+            new StaticAction(SOLAR_RIGHT_OFF,true),
+            new StaticAction(SOLAR_LEFT_OFF,true)
         }
     );
-    brain_bourre = new SequenceManager({Brain_Bourre}); 
+    brain_numeriexplore = new SequenceManager({Brain_Numeriexplore}); 
     brain_bleu = new SequenceManager({Brain_Bleu}); 
     brain_jaune = new SequenceManager({Brain_Jaune});
 
     // Default team color is blue
 
     //robot = new Robot(robotInitBleu.getX(), robotInitBleu.getY(), robotInitBleu.getTheta());
-    robot = new Robot(robotInitJaune.getX(), robotInitJaune.getY(), robotInitJaune.getTheta());
-    brain = brain_jaune;
+    //robot = new Robot(robotInitJaune.getX(), robotInitJaune.getY(), robotInitJaune.getTheta());
+    robot = new Robot(robotInitZero.getX(), robotInitZero.getY(), robotInitZero.getTheta());
+    brain = brain_numeriexplore;
     robot->comESP.send(newMessageActuator(Teensy, ESP_32, SetTeamColorBleu));
 
     /* MISC */
