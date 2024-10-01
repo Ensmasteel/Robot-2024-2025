@@ -1,0 +1,648 @@
+Language="VBSCRIPT"
+Dim storePath as String
+
+' Sub to strore a document'
+sub saveDocument(document,name,ext)
+if (len(storePath)=0) then
+Input = InputBox("Enter Path (e.g. c:\catfiles\ )")
+storePath=Input
+end if
+document.SaveAs storePath & name & ext
+end sub
+
+Sub CreatePart1(PartDocument)
+PartDocument.GetItem(1).PartNumber="Michaud Chailly L1-6000-2Z_PART1"
+Dim  skCoord ( 8 )
+Dim Body As AnyObject
+Set Body = PartDocument.Part.Bodies.Item  (1)
+Dim HybridBody1 As HybridBody
+Set HybridBody1 = PartDocument.Part.HybridBodies.Add
+PartDocument.Selection.Clear
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneXY
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneYZ
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneZx
+PartDocument.Selection.VisProperties.SetShow(1)
+PartDocument.Selection.Clear
+PartDocument.Selection.Clear
+PartDocument.Selection.Add HybridBody1
+PartDocument.Selection.VisProperties.SetShow(1)
+PartDocument.Selection.Clear
+PartDocument.Part.InWorkObject =HybridBody1
+PartDocument.Part.Update
+set hypFact=PartDocument.Part.HybridShapeFactory
+Set HybridShapePointCoord0 = hypFact.AddNewPointCoord  ( 0,0,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord0
+PartDocument.Part.InWorkObject =HybridShapePointCoord0
+PartDocument.Part.Update
+Set HybridShapePointCoord1 = hypFact.AddNewPointCoord  ( 1,0,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord1
+PartDocument.Part.InWorkObject =HybridShapePointCoord1
+PartDocument.Part.Update
+Set HybridShapePointCoord2 = hypFact.AddNewPointCoord  ( 0,1,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord2
+PartDocument.Part.InWorkObject =HybridShapePointCoord2
+PartDocument.Part.Update
+set Reference0 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord0 ) 
+set Reference1 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord1 ) 
+set Reference2 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord2 ) 
+Set absPlane = hypFact.AddNewPlane3Points  ( Reference0, Reference1, Reference2 ) 
+HybridBody1.AppendHybridShape absPlane
+PartDocument.Part.InWorkObject =absPlane
+PartDocument.Part.Update
+Set absRef = PartDocument.Part.CreateReferenceFromGeometry(absPlane)
+PartDocument.Part.Update
+PartDocument.Part.InWorkObject = Body
+set sketch= Body.Sketches.Add  ( absRef )
+PartDocument.Part.InWorkObject =sketch
+PartDocument.Part.Update
+set factory2d=sketch.OpenEdition
+Set Axis2D7 = Sketch.AbsoluteAxis
+Set Line2D8 = Axis2D7.HorizontalReference
+Line2D8.ReportName = 1
+Set Line2D9 = Axis2D7.VerticalReference
+Line2D9.ReportName = 2
+set pk=Factory2D.CreatePoint(0,12.6)
+set pk=Factory2D.CreatePoint(0,10.92)
+set line=factory2d.CreateLine(0,12.6,0,10.92)
+set pk=Factory2D.CreatePoint(0,10.92)
+set pk=Factory2D.CreatePoint(0.45820864063974,10.92)
+set line=factory2d.CreateLine(0,10.92,0.45820864063974,10.92)
+set pk=Factory2D.CreatePoint(0.45820864063974,10.92)
+set pk=Factory2D.CreatePoint(0.8,10.328)
+set line=factory2d.CreateLine(0.45820864063974,10.92,0.8,10.328)
+set pk=Factory2D.CreatePoint(0.8,10.328)
+set pk=Factory2D.CreatePoint(2.000896200794,10.328)
+set line=factory2d.CreateLine(0.8,10.328,2.000896200794,10.328)
+set cir=Factory2D.CreateCircle(4,9,2.4,0.58636073663759,2.5552319169522)
+set pk=Factory2D.CreatePoint(5.999103799206,10.328)
+set pk=Factory2D.CreatePoint(7.2,10.328)
+set line=factory2d.CreateLine(5.999103799206,10.328,7.2,10.328)
+set pk=Factory2D.CreatePoint(7.2,10.328)
+set pk=Factory2D.CreatePoint(7.5417913593603,10.92)
+set line=factory2d.CreateLine(7.2,10.328,7.5417913593603,10.92)
+set pk=Factory2D.CreatePoint(7.5417913593603,10.92)
+set pk=Factory2D.CreatePoint(8,10.92)
+set line=factory2d.CreateLine(7.5417913593603,10.92,8,10.92)
+set pk=Factory2D.CreatePoint(8,10.92)
+set pk=Factory2D.CreatePoint(8,12.6)
+set line=factory2d.CreateLine(8,10.92,8,12.6)
+set cir=Factory2D.CreateCircle(7.6,12.6,0.4,0,1.5707963267949)
+set pk=Factory2D.CreatePoint(7.6,13)
+set pk=Factory2D.CreatePoint(0.4,13)
+set line=factory2d.CreateLine(7.6,13,0.4,13)
+set cir=Factory2D.CreateCircle(0.4,12.6,0.4,1.5707963267949,3.1415926386886)
+set pk=Factory2D.CreatePoint(8,0)
+set pk=Factory2D.CreatePoint(0,0)
+set line=factory2d.CreateLine(8,0,0,0)
+sketch.centerline=line
+PartDocument.Part.Update
+Sketch.CloseEdition
+set sketch3=sketch
+PartDocument.Part.Update
+PartDocument.Part.InWorkObject = Body
+PartDocument.Part.Update
+set shaft=PartDocument.Part.ShapeFactory.AddNewShaft(sketch3)
+shaft.firstAngle.value=0
+shaft.SecondAngle.value=360
+PartDocument.Part.Update
+saveDocument PartDocument,"MC_6000_2Z_PART1",".CATPart"
+End Sub
+Set PartDocument1 = CATIA.Documents.Add  ("Part")
+CreatePart1 PartDocument1
+
+Sub CreatePart2(PartDocument)
+PartDocument.GetItem(1).PartNumber="Michaud Chailly L1-6000-2Z_PART2"
+Dim  skCoord ( 8 )
+Dim Body As AnyObject
+Set Body = PartDocument.Part.Bodies.Item  (1)
+Dim HybridBody1 As HybridBody
+Set HybridBody1 = PartDocument.Part.HybridBodies.Add
+PartDocument.Selection.Clear
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneXY
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneYZ
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneZx
+PartDocument.Selection.VisProperties.SetShow(1)
+PartDocument.Selection.Clear
+PartDocument.Selection.Clear
+PartDocument.Selection.Add HybridBody1
+PartDocument.Selection.VisProperties.SetShow(1)
+PartDocument.Selection.Clear
+PartDocument.Part.InWorkObject =HybridBody1
+PartDocument.Part.Update
+set hypFact=PartDocument.Part.HybridShapeFactory
+Set HybridShapePointCoord0 = hypFact.AddNewPointCoord  ( 0,0,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord0
+PartDocument.Part.InWorkObject =HybridShapePointCoord0
+PartDocument.Part.Update
+Set HybridShapePointCoord1 = hypFact.AddNewPointCoord  ( 1,0,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord1
+PartDocument.Part.InWorkObject =HybridShapePointCoord1
+PartDocument.Part.Update
+Set HybridShapePointCoord2 = hypFact.AddNewPointCoord  ( 0,1,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord2
+PartDocument.Part.InWorkObject =HybridShapePointCoord2
+PartDocument.Part.Update
+set Reference0 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord0 ) 
+set Reference1 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord1 ) 
+set Reference2 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord2 ) 
+Set absPlane = hypFact.AddNewPlane3Points  ( Reference0, Reference1, Reference2 ) 
+HybridBody1.AppendHybridShape absPlane
+PartDocument.Part.InWorkObject =absPlane
+PartDocument.Part.Update
+Set absRef = PartDocument.Part.CreateReferenceFromGeometry(absPlane)
+PartDocument.Part.Update
+PartDocument.Part.InWorkObject = Body
+set sketch= Body.Sketches.Add  ( absRef )
+PartDocument.Part.InWorkObject =sketch
+PartDocument.Part.Update
+set factory2d=sketch.OpenEdition
+Set Axis2D7 = Sketch.AbsoluteAxis
+Set Line2D8 = Axis2D7.HorizontalReference
+Line2D8.ReportName = 1
+Set Line2D9 = Axis2D7.VerticalReference
+Line2D9.ReportName = 2
+set pk=Factory2D.CreatePoint(0,7.448)
+set pk=Factory2D.CreatePoint(0,5.4)
+set line=factory2d.CreateLine(0,7.448,0,5.4)
+set cir=Factory2D.CreateCircle(0.4,5.4,0.4,3.1415926535898,4.7123889803847)
+set pk=Factory2D.CreatePoint(0.4,5)
+set pk=Factory2D.CreatePoint(7.6,5)
+set line=factory2d.CreateLine(0.4,5,7.6,5)
+set cir=Factory2D.CreateCircle(7.6,5.4,0.4,4.7123889803847,0)
+set pk=Factory2D.CreatePoint(8,5.4)
+set pk=Factory2D.CreatePoint(8,7.448)
+set line=factory2d.CreateLine(8,5.4,8,7.448)
+set pk=Factory2D.CreatePoint(8,7.448)
+set pk=Factory2D.CreatePoint(5.8306545277578,7.448)
+set line=factory2d.CreateLine(8,7.448,5.8306545277578,7.448)
+set cir=Factory2D.CreateCircle(4,9,2.4,3.8447989293592,5.5799790314101)
+set pk=Factory2D.CreatePoint(2.1693454722422,7.448)
+set pk=Factory2D.CreatePoint(0,7.448)
+set line=factory2d.CreateLine(2.1693454722422,7.448,0,7.448)
+set pk=Factory2D.CreatePoint(8,0)
+set pk=Factory2D.CreatePoint(0,0)
+set line=factory2d.CreateLine(8,0,0,0)
+sketch.centerline=line
+PartDocument.Part.Update
+Sketch.CloseEdition
+set sketch3=sketch
+PartDocument.Part.Update
+PartDocument.Part.InWorkObject = Body
+PartDocument.Part.Update
+set shaft=PartDocument.Part.ShapeFactory.AddNewShaft(sketch3)
+shaft.firstAngle.value=0
+shaft.SecondAngle.value=360
+PartDocument.Part.Update
+saveDocument PartDocument,"MC_6000_2Z_PART2",".CATPart"
+End Sub
+Set PartDocument2 = CATIA.Documents.Add  ("Part")
+CreatePart2 PartDocument2
+
+Sub CreatePart3(PartDocument)
+PartDocument.GetItem(1).PartNumber="Michaud Chailly L1-6000-2Z_PART3"
+Dim  skCoord ( 8 )
+Dim Body As AnyObject
+Set Body = PartDocument.Part.Bodies.Item  (1)
+Dim HybridBody1 As HybridBody
+Set HybridBody1 = PartDocument.Part.HybridBodies.Add
+PartDocument.Selection.Clear
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneXY
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneYZ
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneZx
+PartDocument.Selection.VisProperties.SetShow(1)
+PartDocument.Selection.Clear
+PartDocument.Selection.Clear
+PartDocument.Selection.Add HybridBody1
+PartDocument.Selection.VisProperties.SetShow(1)
+PartDocument.Selection.Clear
+PartDocument.Part.InWorkObject =HybridBody1
+PartDocument.Part.Update
+set hypFact=PartDocument.Part.HybridShapeFactory
+Set HybridShapePointCoord0 = hypFact.AddNewPointCoord  ( 0,0,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord0
+PartDocument.Part.InWorkObject =HybridShapePointCoord0
+PartDocument.Part.Update
+Set HybridShapePointCoord1 = hypFact.AddNewPointCoord  ( 1,0,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord1
+PartDocument.Part.InWorkObject =HybridShapePointCoord1
+PartDocument.Part.Update
+Set HybridShapePointCoord2 = hypFact.AddNewPointCoord  ( 0,1,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord2
+PartDocument.Part.InWorkObject =HybridShapePointCoord2
+PartDocument.Part.Update
+set Reference0 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord0 ) 
+set Reference1 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord1 ) 
+set Reference2 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord2 ) 
+Set absPlane = hypFact.AddNewPlane3Points  ( Reference0, Reference1, Reference2 ) 
+HybridBody1.AppendHybridShape absPlane
+PartDocument.Part.InWorkObject =absPlane
+PartDocument.Part.Update
+Set absRef = PartDocument.Part.CreateReferenceFromGeometry(absPlane)
+PartDocument.Part.Update
+PartDocument.Part.InWorkObject = Body
+set sketch= Body.Sketches.Add  ( absRef )
+PartDocument.Part.InWorkObject =sketch
+PartDocument.Part.Update
+set factory2d=sketch.OpenEdition
+Set Axis2D7 = Sketch.AbsoluteAxis
+Set Line2D8 = Axis2D7.HorizontalReference
+Line2D8.ReportName = 1
+Set Line2D9 = Axis2D7.VerticalReference
+Line2D9.ReportName = 2
+set pk=Factory2D.CreatePoint(0,10.599158855751)
+set pk=Factory2D.CreatePoint(0,7.448)
+set line=factory2d.CreateLine(0,10.599158855751,0,7.448)
+set pk=Factory2D.CreatePoint(0,7.448)
+set pk=Factory2D.CreatePoint(0.12,7.448)
+set line=factory2d.CreateLine(0,7.448,0.12,7.448)
+set pk=Factory2D.CreatePoint(0.12,7.448)
+set pk=Factory2D.CreatePoint(0.12,9.8518588740174)
+set line=factory2d.CreateLine(0.12,7.448,0.12,9.8518588740174)
+set pk=Factory2D.CreatePoint(0.12,9.8518588740174)
+set pk=Factory2D.CreatePoint(0.8,10.328)
+set line=factory2d.CreateLine(0.12,9.8518588740174,0.8,10.328)
+set pk=Factory2D.CreatePoint(0.8,10.328)
+set pk=Factory2D.CreatePoint(0.45820864063974,10.92)
+set line=factory2d.CreateLine(0.8,10.328,0.45820864063974,10.92)
+set pk=Factory2D.CreatePoint(0.45820864063974,10.92)
+set pk=Factory2D.CreatePoint(0,10.599158855751)
+set line=factory2d.CreateLine(0.45820864063974,10.92,0,10.599158855751)
+set pk=Factory2D.CreatePoint(0.8,1.7479351299698e-015)
+set pk=Factory2D.CreatePoint(0,1.7763568394003e-015)
+set line=factory2d.CreateLine(0.8,1.7479351299698e-015,0,1.7763568394003e-015)
+sketch.centerline=line
+PartDocument.Part.Update
+Sketch.CloseEdition
+set sketch3=sketch
+PartDocument.Part.Update
+PartDocument.Part.InWorkObject = Body
+PartDocument.Part.Update
+set shaft=PartDocument.Part.ShapeFactory.AddNewShaft(sketch3)
+shaft.firstAngle.value=0
+shaft.SecondAngle.value=360
+PartDocument.Part.Update
+saveDocument PartDocument,"MC_6000_2Z_PART3",".CATPart"
+End Sub
+Set PartDocument3 = CATIA.Documents.Add  ("Part")
+CreatePart3 PartDocument3
+
+Sub CreatePart4(PartDocument)
+PartDocument.GetItem(1).PartNumber="Michaud Chailly L1-6000-2Z_PART4"
+Dim  skCoord ( 8 )
+Dim Body As AnyObject
+Set Body = PartDocument.Part.Bodies.Item  (1)
+Dim HybridBody1 As HybridBody
+Set HybridBody1 = PartDocument.Part.HybridBodies.Add
+PartDocument.Selection.Clear
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneXY
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneYZ
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneZx
+PartDocument.Selection.VisProperties.SetShow(1)
+PartDocument.Selection.Clear
+PartDocument.Selection.Clear
+PartDocument.Selection.Add HybridBody1
+PartDocument.Selection.VisProperties.SetShow(1)
+PartDocument.Selection.Clear
+PartDocument.Part.InWorkObject =HybridBody1
+PartDocument.Part.Update
+set hypFact=PartDocument.Part.HybridShapeFactory
+Set HybridShapePointCoord0 = hypFact.AddNewPointCoord  ( 0,0,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord0
+PartDocument.Part.InWorkObject =HybridShapePointCoord0
+PartDocument.Part.Update
+Set HybridShapePointCoord1 = hypFact.AddNewPointCoord  ( 1,0,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord1
+PartDocument.Part.InWorkObject =HybridShapePointCoord1
+PartDocument.Part.Update
+Set HybridShapePointCoord2 = hypFact.AddNewPointCoord  ( 0,1,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord2
+PartDocument.Part.InWorkObject =HybridShapePointCoord2
+PartDocument.Part.Update
+set Reference0 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord0 ) 
+set Reference1 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord1 ) 
+set Reference2 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord2 ) 
+Set absPlane = hypFact.AddNewPlane3Points  ( Reference0, Reference1, Reference2 ) 
+HybridBody1.AppendHybridShape absPlane
+PartDocument.Part.InWorkObject =absPlane
+PartDocument.Part.Update
+Set absRef = PartDocument.Part.CreateReferenceFromGeometry(absPlane)
+PartDocument.Part.Update
+PartDocument.Part.InWorkObject = Body
+set sketch= Body.Sketches.Add  ( absRef )
+PartDocument.Part.InWorkObject =sketch
+PartDocument.Part.Update
+set factory2d=sketch.OpenEdition
+Set Axis2D7 = Sketch.AbsoluteAxis
+Set Line2D8 = Axis2D7.HorizontalReference
+Line2D8.ReportName = 1
+Set Line2D9 = Axis2D7.VerticalReference
+Line2D9.ReportName = 2
+set pk=Factory2D.CreatePoint(7.2,10.328)
+set pk=Factory2D.CreatePoint(7.88,9.8518588740174)
+set line=factory2d.CreateLine(7.2,10.328,7.88,9.8518588740174)
+set pk=Factory2D.CreatePoint(7.88,9.8518588740174)
+set pk=Factory2D.CreatePoint(7.88,7.448)
+set line=factory2d.CreateLine(7.88,9.8518588740174,7.88,7.448)
+set pk=Factory2D.CreatePoint(7.88,7.448)
+set pk=Factory2D.CreatePoint(8,7.448)
+set line=factory2d.CreateLine(7.88,7.448,8,7.448)
+set pk=Factory2D.CreatePoint(8,7.448)
+set pk=Factory2D.CreatePoint(8,10.599158855751)
+set line=factory2d.CreateLine(8,7.448,8,10.599158855751)
+set pk=Factory2D.CreatePoint(8,10.599158855751)
+set pk=Factory2D.CreatePoint(7.5417913593603,10.92)
+set line=factory2d.CreateLine(8,10.599158855751,7.5417913593603,10.92)
+set pk=Factory2D.CreatePoint(7.5417913593603,10.92)
+set pk=Factory2D.CreatePoint(7.2,10.328)
+set line=factory2d.CreateLine(7.5417913593603,10.92,7.2,10.328)
+set pk=Factory2D.CreatePoint(8,-1.7763568394003e-015)
+set pk=Factory2D.CreatePoint(7.2,-1.7479351299698e-015)
+set line=factory2d.CreateLine(8,-1.7763568394003e-015,7.2,-1.7479351299698e-015)
+sketch.centerline=line
+PartDocument.Part.Update
+Sketch.CloseEdition
+set sketch3=sketch
+PartDocument.Part.Update
+PartDocument.Part.InWorkObject = Body
+PartDocument.Part.Update
+set shaft=PartDocument.Part.ShapeFactory.AddNewShaft(sketch3)
+shaft.firstAngle.value=0
+shaft.SecondAngle.value=360
+PartDocument.Part.Update
+saveDocument PartDocument,"MC_6000_2Z_PART4",".CATPart"
+End Sub
+Set PartDocument4 = CATIA.Documents.Add  ("Part")
+CreatePart4 PartDocument4
+
+Sub CreatePart5(PartDocument)
+PartDocument.GetItem(1).PartNumber="Michaud Chailly L1-6000-2Z_PART5"
+Dim  skCoord ( 8 )
+Dim Body As AnyObject
+Set Body = PartDocument.Part.Bodies.Item  (1)
+Dim HybridBody1 As HybridBody
+Set HybridBody1 = PartDocument.Part.HybridBodies.Add
+PartDocument.Selection.Clear
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneXY
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneYZ
+PartDocument.Selection.Add PartDocument.Part.OriginElements.PlaneZx
+PartDocument.Selection.VisProperties.SetShow(1)
+PartDocument.Selection.Clear
+PartDocument.Selection.Clear
+PartDocument.Selection.Add HybridBody1
+PartDocument.Selection.VisProperties.SetShow(1)
+PartDocument.Selection.Clear
+PartDocument.Part.InWorkObject =HybridBody1
+PartDocument.Part.Update
+set hypFact=PartDocument.Part.HybridShapeFactory
+Set HybridShapePointCoord0 = hypFact.AddNewPointCoord  ( 0,0,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord0
+PartDocument.Part.InWorkObject =HybridShapePointCoord0
+PartDocument.Part.Update
+Set HybridShapePointCoord1 = hypFact.AddNewPointCoord  ( 1,0,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord1
+PartDocument.Part.InWorkObject =HybridShapePointCoord1
+PartDocument.Part.Update
+Set HybridShapePointCoord2 = hypFact.AddNewPointCoord  ( 0,1,0) 
+HybridBody1.AppendHybridShape HybridShapePointCoord2
+PartDocument.Part.InWorkObject =HybridShapePointCoord2
+PartDocument.Part.Update
+set Reference0 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord0 ) 
+set Reference1 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord1 ) 
+set Reference2 = PartDocument.Part.CreateReferenceFromGeometry  ( HybridShapePointCoord2 ) 
+Set absPlane = hypFact.AddNewPlane3Points  ( Reference0, Reference1, Reference2 ) 
+HybridBody1.AppendHybridShape absPlane
+PartDocument.Part.InWorkObject =absPlane
+PartDocument.Part.Update
+Set absRef = PartDocument.Part.CreateReferenceFromGeometry(absPlane)
+PartDocument.Part.Update
+PartDocument.Part.InWorkObject = Body
+set sketch= Body.Sketches.Add  ( absRef )
+PartDocument.Part.InWorkObject =sketch
+PartDocument.Part.Update
+set factory2d=sketch.OpenEdition
+Set Axis2D7 = Sketch.AbsoluteAxis
+Set Line2D8 = Axis2D7.HorizontalReference
+Line2D8.ReportName = 1
+Set Line2D9 = Axis2D7.VerticalReference
+Line2D9.ReportName = 2
+set cir=Factory2D.CreateCircle(4,9,2.4,3.1415926535898,0)
+set pk=Factory2D.CreatePoint(1.6,9)
+set pk=Factory2D.CreatePoint(6.4,9)
+set line=factory2d.CreateLine(1.6,9,6.4,9)
+set pk=Factory2D.CreatePoint(1.6,9)
+set pk=Factory2D.CreatePoint(6.4,9)
+set line=factory2d.CreateLine(1.6,9,6.4,9)
+sketch.centerline=line
+PartDocument.Part.Update
+Sketch.CloseEdition
+set sketch3=sketch
+PartDocument.Part.Update
+PartDocument.Part.InWorkObject = Body
+PartDocument.Part.Update
+set shaft=PartDocument.Part.ShapeFactory.AddNewShaft(sketch3)
+shaft.firstAngle.value=0
+shaft.SecondAngle.value=360
+PartDocument.Part.Update
+saveDocument PartDocument,"MC_6000_2Z_PART5",".CATPart"
+End Sub
+Set PartDocument5 = CATIA.Documents.Add  ("Part")
+CreatePart5 PartDocument5
+
+
+' Create Assembly
+sub CreateAsm5
+Dim mat (11)
+Dim pin (0)
+dim docName as String
+Dim ProductDocument as Document
+set ProductDocument = CATIA.Documents.Add("Product")
+Dim Product as AnyObject
+set Product=ProductDocument.Product
+Product.PartNumber="Michaud Chailly L1-6000-2Z"
+mat ( 0 ) =1.000000
+mat ( 1 ) =0.000000
+mat ( 2 ) =0.000000
+mat ( 3 ) =0.000000
+mat ( 4 ) =1.000000
+mat ( 5 ) =0.000000
+mat ( 6 ) =0.000000
+mat ( 7 ) =0.000000
+mat ( 8 ) =1.000000
+mat ( 9 ) =0.000000
+mat ( 10) =0.000000
+mat ( 11) =0.000000
+set newProd=Product.Products.AddComponent (PartDocument1.GetItem(1))
+NewProd.Move.Apply mat
+mat ( 0 ) =1.000000
+mat ( 1 ) =0.000000
+mat ( 2 ) =0.000000
+mat ( 3 ) =0.000000
+mat ( 4 ) =1.000000
+mat ( 5 ) =0.000000
+mat ( 6 ) =0.000000
+mat ( 7 ) =0.000000
+mat ( 8 ) =1.000000
+mat ( 9 ) =0.000000
+mat ( 10) =0.000000
+mat ( 11) =0.000000
+set newProd=Product.Products.AddComponent (PartDocument2.GetItem(1))
+NewProd.Move.Apply mat
+mat ( 0 ) =1.000000
+mat ( 1 ) =0.000000
+mat ( 2 ) =0.000000
+mat ( 3 ) =0.000000
+mat ( 4 ) =1.000000
+mat ( 5 ) =0.000000
+mat ( 6 ) =0.000000
+mat ( 7 ) =0.000000
+mat ( 8 ) =1.000000
+mat ( 9 ) =0.000000
+mat ( 10) =0.000000
+mat ( 11) =0.000000
+set newProd=Product.Products.AddComponent (PartDocument3.GetItem(1))
+NewProd.Move.Apply mat
+mat ( 0 ) =1.000000
+mat ( 1 ) =0.000000
+mat ( 2 ) =0.000000
+mat ( 3 ) =0.000000
+mat ( 4 ) =1.000000
+mat ( 5 ) =0.000000
+mat ( 6 ) =0.000000
+mat ( 7 ) =0.000000
+mat ( 8 ) =1.000000
+mat ( 9 ) =0.000000
+mat ( 10) =0.000000
+mat ( 11) =0.000000
+set newProd=Product.Products.AddComponent (PartDocument4.GetItem(1))
+NewProd.Move.Apply mat
+mat ( 0 ) =1.000000
+mat ( 1 ) =0.000000
+mat ( 2 ) =0.000000
+mat ( 3 ) =0.000000
+mat ( 4 ) =1.000000
+mat ( 5 ) =0.000000
+mat ( 6 ) =0.000000
+mat ( 7 ) =0.000000
+mat ( 8 ) =1.000000
+mat ( 9 ) =0.000000
+mat ( 10) =0.000000
+mat ( 11) =0.000000
+set newProd=Product.Products.AddComponent (PartDocument5.GetItem(1))
+NewProd.Move.Apply mat
+mat ( 0 ) =1.000000
+mat ( 1 ) =0.000000
+mat ( 2 ) =0.000000
+mat ( 3 ) =0.000000
+mat ( 4 ) =0.707107
+mat ( 5 ) =-0.707107
+mat ( 6 ) =0.000000
+mat ( 7 ) =0.707107
+mat ( 8 ) =0.707107
+mat ( 9 ) =0.000000
+mat ( 10) =0.000000
+mat ( 11) =0.000000
+set newProd=Product.Products.AddComponent (PartDocument5.GetItem(1))
+NewProd.Move.Apply mat
+mat ( 0 ) =1.000000
+mat ( 1 ) =0.000000
+mat ( 2 ) =0.000000
+mat ( 3 ) =0.000000
+mat ( 4 ) =0.000000
+mat ( 5 ) =-1.000000
+mat ( 6 ) =0.000000
+mat ( 7 ) =1.000000
+mat ( 8 ) =0.000000
+mat ( 9 ) =0.000000
+mat ( 10) =0.000000
+mat ( 11) =0.000000
+set newProd=Product.Products.AddComponent (PartDocument5.GetItem(1))
+NewProd.Move.Apply mat
+mat ( 0 ) =1.000000
+mat ( 1 ) =0.000000
+mat ( 2 ) =0.000000
+mat ( 3 ) =0.000000
+mat ( 4 ) =-0.707107
+mat ( 5 ) =-0.707107
+mat ( 6 ) =0.000000
+mat ( 7 ) =0.707107
+mat ( 8 ) =-0.707107
+mat ( 9 ) =0.000000
+mat ( 10) =0.000000
+mat ( 11) =0.000000
+set newProd=Product.Products.AddComponent (PartDocument5.GetItem(1))
+NewProd.Move.Apply mat
+mat ( 0 ) =1.000000
+mat ( 1 ) =0.000000
+mat ( 2 ) =0.000000
+mat ( 3 ) =0.000000
+mat ( 4 ) =-1.000000
+mat ( 5 ) =0.000000
+mat ( 6 ) =0.000000
+mat ( 7 ) =0.000000
+mat ( 8 ) =-1.000000
+mat ( 9 ) =0.000000
+mat ( 10) =0.000000
+mat ( 11) =0.000000
+set newProd=Product.Products.AddComponent (PartDocument5.GetItem(1))
+NewProd.Move.Apply mat
+mat ( 0 ) =1.000000
+mat ( 1 ) =0.000000
+mat ( 2 ) =0.000000
+mat ( 3 ) =0.000000
+mat ( 4 ) =-0.707107
+mat ( 5 ) =0.707107
+mat ( 6 ) =0.000000
+mat ( 7 ) =-0.707107
+mat ( 8 ) =-0.707107
+mat ( 9 ) =0.000000
+mat ( 10) =0.000000
+mat ( 11) =0.000000
+set newProd=Product.Products.AddComponent (PartDocument5.GetItem(1))
+NewProd.Move.Apply mat
+mat ( 0 ) =1.000000
+mat ( 1 ) =0.000000
+mat ( 2 ) =0.000000
+mat ( 3 ) =0.000000
+mat ( 4 ) =0.000000
+mat ( 5 ) =1.000000
+mat ( 6 ) =0.000000
+mat ( 7 ) =-1.000000
+mat ( 8 ) =0.000000
+mat ( 9 ) =0.000000
+mat ( 10) =0.000000
+mat ( 11) =0.000000
+set newProd=Product.Products.AddComponent (PartDocument5.GetItem(1))
+NewProd.Move.Apply mat
+mat ( 0 ) =1.000000
+mat ( 1 ) =0.000000
+mat ( 2 ) =0.000000
+mat ( 3 ) =0.000000
+mat ( 4 ) =0.707107
+mat ( 5 ) =0.707107
+mat ( 6 ) =0.000000
+mat ( 7 ) =-0.707107
+mat ( 8 ) =0.707107
+mat ( 9 ) =0.000000
+mat ( 10) =0.000000
+mat ( 11) =0.000000
+set newProd=Product.Products.AddComponent (PartDocument5.GetItem(1))
+NewProd.Move.Apply mat
+saveDocument ProductDocument,"MC_6000_2Z",".CATProduct"
+end sub
+
+createAsm5
+PartDocument1.Activate
+CATIA.ActiveWindow.Close
+PartDocument1.Close
+PartDocument2.Activate
+CATIA.ActiveWindow.Close
+PartDocument2.Close
+PartDocument3.Activate
+CATIA.ActiveWindow.Close
+PartDocument3.Close
+PartDocument4.Activate
+CATIA.ActiveWindow.Close
+PartDocument4.Close
+PartDocument5.Activate
+CATIA.ActiveWindow.Close
+PartDocument5.Close
