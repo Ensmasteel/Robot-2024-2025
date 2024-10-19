@@ -1,0 +1,1 @@
+Dépot de logos utilisables
