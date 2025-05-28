@@ -1,0 +1,5 @@
+../Drivers/STM32C0xx_HAL_Driver/Src/stm32c0xx_hal_rcc_ex.c:94:19:HAL_RCCEx_PeriphCLKConfig	32	static
+../Drivers/STM32C0xx_HAL_Driver/Src/stm32c0xx_hal_rcc_ex.c:240:6:HAL_RCCEx_GetPeriphCLKConfig	16	static
+../Drivers/STM32C0xx_HAL_Driver/Src/stm32c0xx_hal_rcc_ex.c:287:10:HAL_RCCEx_GetPeriphCLKFreq	24	static
+../Drivers/STM32C0xx_HAL_Driver/Src/stm32c0xx_hal_rcc_ex.c:473:6:HAL_RCCEx_EnableLSCO	40	static
+../Drivers/STM32C0xx_HAL_Driver/Src/stm32c0xx_hal_rcc_ex.c:498:6:HAL_RCCEx_DisableLSCO	8	static
