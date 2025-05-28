@@ -92,11 +92,11 @@ Le châssis est la **pièce la plus basse**. Voici les étapes :
    - 1 à l’avant (vis par le dessous)
 2. Ajouter 4 **heat inserts** sur la face supérieure (pour le PCB)
 
-💡 *Le PCB peut être monté “à la zob” sans entretoises, mais ce n’est pas recommandé.*
+>💡 *Le PCB peut être monté “à la zob” sans entretoises.*
 
 - Faire passer les câbles via les trous de **câble management**
 - Connecter à l’électronique dans le châssis
-- Positionner la pièce du milieu et visser avec des **vis M3 coniques courtes** (sachet 4) :
+- Positionner la pièce du milieu et visser avec des **vis M3 coniques courtes** (sachet de vis qui traine) :
   - 2 à l’avant (en diagonale, méthode **Belpois™**)  
   - 2 à l’arrière
 
@@ -113,7 +113,7 @@ Le châssis est la **pièce la plus basse**. Voici les étapes :
 ### 2.4 Roues
 
 - Réaliser les pneus avec du **caoutchouc**, puis les emmancher.
-- Les nouvelles roues disposent d’un **détrompeur** pour faciliter le montage.
+- Les nouvelles roues disposent d’un **détrompeur**.
 
 ---
 
