@@ -15,9 +15,9 @@ class Motor{
      * @param pinPWM : uint8_t, Pin sur laquelle la puissance est donnee
      * @param pinIN1 : uint8_t, Pin avec signal booleen représentant la direction du moteur
      * @param numberBitsPWM : uint8_t, Indique le nombre de bits sur laquelle est defini le PWM du moteur (entre 8 et 16)
-     * @param rotationWay : monté à l'endroit?
+     * @param isBackwards : monté à l'endroit?
     */
-    Motor(uint8_t pinPWM, uint8_t pinIN1, uint8_t numberBitsPWM, bool rotationWay); 
+    Motor(uint8_t pinPWM, uint8_t pinIN1, uint8_t numberBitsPWM, bool isBackwards); 
     Motor(){};
     /**
      * Fonction permettant d'actualiser la puissance moteur
@@ -61,6 +61,7 @@ class Motor{
         uint8_t numberBitsPWM; //Indique le nombre de bits sur laquelle est defini le PWM du moteur (entre 8 et 16) 
         bool priorityOrder = false; //Booleen d'ordre prioritaire : utile pour les recallages (le moteur tourne tant que les interrupteurs ne sont pas actives) et pour stopper le robot via le Lidar
         uint16_t priorityPWMValue; //Donne la puissance au moteur pendant l'ordre prioritaire
+        bool isBackwards = false; //Booleen indiquant si le moteur est monté à l'envers
         bool rotationWay = true; //Booleen du sens de rotation du moteur
 };
 

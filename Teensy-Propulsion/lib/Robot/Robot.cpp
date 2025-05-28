@@ -8,7 +8,7 @@ Robot::Robot(float x_ini, float y_ini, float theta_ini) {
     this->kineticNext = Kinetic(x_ini, y_ini, theta_ini, 0, 0);
 
     this->ghost = Ghost(vectIni);
-    this->motorL = Motor(PIN_LEFT_MOTOR_PWM, PIN_LEFT_MOTOR_IN1, 13, true);
+    this->motorL = Motor(PIN_LEFT_MOTOR_PWM, PIN_LEFT_MOTOR_IN1, 13, false);
     this->motorR = Motor(PIN_RIGHT_MOTOR_PWM, PIN_RIGHT_MOTOR_IN1, 13, false);
 
     this->codeuseR = Codeuse(PIN_CODEUSE_DROITE_A, PIN_CODEUSE_DROITE_B, 8192 * (1 - SYM), 0.05688, true);

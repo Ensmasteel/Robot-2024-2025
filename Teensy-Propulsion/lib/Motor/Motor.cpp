@@ -1,11 +1,12 @@
 #include "Motor.h"
 
-Motor::Motor(uint8_t pinPWM, uint8_t pinIN1, uint8_t numberBitsPWM, bool rotationWay) {
+Motor::Motor(uint8_t pinPWM, uint8_t pinIN1, uint8_t numberBitsPWM, bool isBackwards) {
     this->pinPWM = pinPWM;
     pinMode(pinPWM, OUTPUT);
     this->pinIN1 = pinIN1;
     pinMode(pinIN1, OUTPUT);
     this->numberBitsPWM = numberBitsPWM;
+    this->isBackwards = isBackwards;
 
     maxPWM = (uint16_t)round(pow(2, numberBitsPWM)) - 1;
     analogWriteResolution(numberBitsPWM);
@@ -40,9 +41,9 @@ void Motor::resume() { priorityOrder = false; }
 
 void Motor::setPWMValue(float PIDOrder) {
     if (PIDOrder >= 0) {
-        rotationWay = true;
+        rotationWay = !isBackwards;
     } else {
-        rotationWay = false;
+        rotationWay = isBackwards;
     }
     if (!priorityOrder) {
         pwmValue = round(abs(PIDOrder) * maxPWM);
