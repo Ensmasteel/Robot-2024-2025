@@ -14,7 +14,7 @@ Ce document décrit les étapes à suivre pour assembler la partie **électroniq
   - **GND** : au milieu  
   - **+5V** : en haut
 
-- La LED rouge au centre de la carte s’allume pour signaler que l’arrêt est **activé**.
+> La LED rouge au centre de la carte s’allume pour signaler que l’arrêt est **activé**.
 
 #### Séquences d’armement du PAMI :
 - **Premier allumage** : appui sur l’arrêt détecté en front **montant** = armement.
@@ -37,7 +37,7 @@ Ce document décrit les étapes à suivre pour assembler la partie **électroniq
 
   (Repère : connecteur 2x3 à côté du module LoRa)
 
-- Ne pas oublier de connecter le **moteur DC** sur le **+5V** et le **GND**.
+> Ne pas oublier de connecter le **moteur DC** sur le **+5V** et le **GND**.
 
 ---
 
@@ -81,7 +81,7 @@ Le châssis est la **pièce la plus basse**. Voici les étapes :
 3. Moteurs **steppers**  
 4. Carte batterie avec des entretoises de ~6 mm (utiliser des rondelles ou heat inserts)
 
-⚠️ **Placer les batteries à cette étape.**
+> ⚠️ **Placer les batteries à cette étape.**
 
 ---
 
