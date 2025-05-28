@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <FastLED.h>
-#include "LiquidCrystal_I2C.h"
 #include "Communication.h"
 #include "Message.h"
 #include "IDS.h"
@@ -12,8 +11,6 @@
 #define LED_TYPE    WS2812B
 #define COLOR_ORDER GRB
 CRGB leds[NUM_LEDS];
-
-LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 Communication comTeensy = Communication(&Serial);
 Message teen_msg;
@@ -53,13 +50,6 @@ void setup() {
 
     Logger::setup(&Serial, &Serial, &Serial, false, false, false);
 
-    lcd.init();
-    lcd.backlight();
-    delay(100);
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("   ENSMASTEEL   ");
-
     FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
     for(int i = 0; i < NUM_LEDS; i++) {
         leds[i] = CRGB(255, 255, 255);
@@ -74,10 +64,10 @@ void setup() {
 void loop() {
 
     /* Teensy updates */
-    comTeensy.update();
+    /* comTeensy.update(); */
 
     /* Handle the Teensy messages */
-    if (comTeensy.waitingRX()) {
+    /* if (comTeensy.waitingRX()) {
         teen_msg = comTeensy.peekOldestMessage();
         switch (teen_msg.did) {
             case MessActuator:
@@ -102,7 +92,7 @@ void loop() {
                 break;
         }
         comTeensy.popOldestMessage();
-    }
+    } */
 
     /* Lidar updates */
     lidar.update();
@@ -116,6 +106,7 @@ void loop() {
             distance = lidar_frame.data[point_id].distance;
             if (distance > 150 && distance < 400 && lidar_frame.data[point_id].confidence > 225) {
                 angle = ((float) lidar_frame.start_angle + angle_step * (float) point_id) * DEG_TO_RAD * 0.01f;
+                angle -= PI / 4.0f;
                 normalizeAngle(&angle);
                 if (angle < 0.0f && angle > -PI / 2.0f) {
                     // front zone
