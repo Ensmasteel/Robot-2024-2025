@@ -6,24 +6,18 @@
 #include "IDS.h"
 #include "Logger.h"
 
-Servo rato;
+Servo frontRato;
+bool frontRatoIsClosed;
+Servo backRato;
+bool backRatoIsClosed;
 
-Stepper elevator(200, PIN_ELEVATOR_STEP, PIN_ELEVATOR_DIR);
-bool elevator_raised;
-
-Servo SolarLeft;
-Servo SolarRight;
-bool IsSolarLeft;
-bool IsSolarRight;
+/*Stepper frontElevator(200, PIN_FRONT_ELEVATOR_STEP, PIN_FRONT_ELEVATOR_DIR);
+bool frontElevatorIsRaised;
+Stepper backElevator(200, PIN_BACK_ELEVATOR_STEP, PIN_BACK_ELEVATOR_DIR);
+bool backElevatorIsRaised;*/
 
 Communication comTeensy = Communication(&Serial1);
 Message msg;
-
-enum {
-    JAUNE,
-    BLEU
-} teamColor;
-bool buttonReleased;
 
 void setup() {
     Serial.begin(115200);
@@ -31,27 +25,30 @@ void setup() {
 
     Logger::setup(&Serial, &Serial, &Serial, false, false, false);
 
-    rato.attach(PIN_CLAWS);
-    rato.write(180);
+    frontRato.attach(PIN_FRONT_RATO);
+    frontRato.write(80);
+    frontRatoIsClosed = false;
+    backRato.attach(PIN_BACK_RATO);
+    backRato.write(20);
+    backRatoIsClosed = false;
 
-    SolarLeft.attach(PIN_SOLARLEFT);
-    SolarRight.attach(PIN_SOLARRIGHT);
-    IsSolarLeft = false;
-    IsSolarRight = false;
-    SolarRight.write(10);
-    SolarLeft.write(120);
+    pinMode(PIN_FRONT_LEFT_MAGNETS, OUTPUT);
+    pinMode(PIN_FRONT_RIGHT_MAGNETS, OUTPUT);
+    pinMode(PIN_BACK_LEFT_MAGNETS, OUTPUT);
+    pinMode(PIN_BACK_RIGHT_MAGNETS, OUTPUT);
+    digitalWrite(PIN_FRONT_LEFT_MAGNETS, HIGH);
+    digitalWrite(PIN_FRONT_RIGHT_MAGNETS, HIGH);
+    digitalWrite(PIN_BACK_LEFT_MAGNETS, HIGH);
+    digitalWrite(PIN_BACK_RIGHT_MAGNETS, HIGH);
 
-    elevator.setSpeed(3000);
-    elevator.step(3500);
-    elevator_raised = false;
-    elevator.setSpeed(800);
-
-    pinMode(PIN_MAGNET, OUTPUT);
-    digitalWrite(PIN_MAGNET, LOW);
-
-    pinMode(PIN_BOUTON_ECRANT, INPUT);
-    teamColor = JAUNE;
-    buttonReleased = true;
+    /*frontElevator.setSpeed(3000);
+    frontElevator.step(3500);
+    frontElevatorIsRaised = false;
+    frontElevator.setSpeed(800);
+    backElevator.setSpeed(3000);
+    backElevator.step(3500);
+    backElevatorIsRaised = false;
+    backElevator.setSpeed(800);*/
 }
 
 void loop() {
@@ -63,74 +60,69 @@ void loop() {
         msg = comTeensy.peekOldestMessage();
 
         switch(msg.aid) {
-            case OpenClaws:
-                if (msg.did == Todo) rato.write(180);
+            case OpenFrontRato:
+                if (msg.did == Todo) frontRato.write(80);
                 break;
-            case CloseClaws:
-                if (msg.did == Todo) rato.write(138);
+            case CloseFrontRato:
+                if (msg.did == Todo) frontRato.write(0);
                 break;
-            case RaiseClaws:
-                if (msg.did == Todo && !elevator_raised) {
-                    elevator.step(2200);
-                    elevator_raised = true;
+            case OpenBackRato:
+                if (msg.did == Todo) backRato.write(100);
+                break;
+            case CloseBackRato:
+                if (msg.did == Todo) backRato.write(20);
+                break;/*
+            case RaiseFrontMagnets:
+                if (msg.did == Todo && !frontElevatorIsRaised) {
+                    frontElevator.step(2200);
+                    frontElevatorIsRaised = true;
                 }
                 break;
-            case LowerClaws:
-                if (msg.did == Todo && elevator_raised) {
-                    elevator.step(-2200);
-                    elevator_raised = false;
+            case LowerFrontMagnets:
+                if (msg.did == Todo && frontElevatorIsRaised) {
+                    frontElevator.step(-2200);
+                    frontElevatorIsRaised = false;
                 }
                 break;
-            case StartMagnet:
-                if (msg.did == Todo) digitalWrite(PIN_MAGNET, HIGH);
-                break;
-            case ShutdownMagnet:
-                if (msg.did == Todo) digitalWrite(PIN_MAGNET, LOW);
-                break;
-            case SolarLeftOn:
-                if (msg.did == Todo && !IsSolarRight) {
-                    SolarLeft.write(30);
-                    IsSolarLeft = true;
+            case RaiseBackMagnets:
+                if (msg.did == Todo && !backElevatorIsRaised) {
+                    backElevator.step(2200);
+                    backElevatorIsRaised = true;
                 }
                 break;
-            case SolarLeftOff:
-                if (msg.did == Todo) {
-                    SolarLeft.write(120);
-                    IsSolarLeft = false;
-                }  
-                break;
-            case SolarRightOn:
-                if (msg.did == Todo && !IsSolarRight) {
-                    SolarRight.write(100);
-                    IsSolarRight = true;
+            case LowerBackMagnets:
+                if (msg.did == Todo && backElevatorIsRaised) {
+                    backElevator.step(-2200);
+                    backElevatorIsRaised = false;
                 }
+                break;*/
+            case StartFrontLeftMagnets:
+                if (msg.did == Todo) digitalWrite(PIN_FRONT_LEFT_MAGNETS, LOW);
                 break;
-            case SolarRightOff:
-                if (msg.did == Todo) {
-                    SolarRight.write(10);
-                    IsSolarRight = false;
-                }
+            case StopFrontLeftMagnets:
+                if (msg.did == Todo) digitalWrite(PIN_FRONT_LEFT_MAGNETS, HIGH);
+                break;
+            case StartFrontRightMagnets:
+                if (msg.did == Todo) digitalWrite(PIN_FRONT_RIGHT_MAGNETS, LOW);
+                break;
+            case StopFrontRightMagnets:
+                if (msg.did == Todo) digitalWrite(PIN_FRONT_RIGHT_MAGNETS, HIGH);
+                break;
+            case StartBackRightMagnets:
+                if (msg.did == Todo) digitalWrite(PIN_BACK_RIGHT_MAGNETS, LOW);
+                break;
+            case StopBackRightMagnets:
+                if (msg.did == Todo) digitalWrite(PIN_BACK_RIGHT_MAGNETS, HIGH);
+                break;
+            case StartBackLeftMagnets:
+                if (msg.did == Todo) digitalWrite(PIN_BACK_LEFT_MAGNETS, LOW);
+                break;
+            case StopBackLeftMagnets:
+                if (msg.did == Todo) digitalWrite(PIN_BACK_LEFT_MAGNETS, HIGH);
                 break;
             default:
                 break;
         }
         comTeensy.popOldestMessage();
-    }
-
-    /* Handle screen's buttons */
-    if (digitalRead(PIN_BOUTON_ECRANT) == LOW && buttonReleased) {
-        buttonReleased = false;
-        if (teamColor == JAUNE) {
-            teamColor = BLEU;
-            comTeensy.send(newMessageActuator(Arduino, Teensy, SetTeamColorBleu));
-        } else {
-            teamColor = JAUNE;
-            comTeensy.send(newMessageActuator(Arduino, Teensy, SetTeamColorJaune));
-        }
-    } else {
-        if (digitalRead(PIN_BOUTON_ECRANT) == HIGH) {
-            buttonReleased = true;
-            delay(100);
-        }
     }
 }

@@ -62,7 +62,6 @@ void setup() {
 }
 
 void loop() {
-
     /* Teensy updates */
     /* comTeensy.update(); */
 

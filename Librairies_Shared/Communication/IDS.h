@@ -16,18 +16,22 @@ enum EquipmentID : uint8_t
 enum ActionID : uint8_t
 {
     Pause,
-    OpenClaws,
-    CloseClaws,
-    RaiseClaws,
-    LowerClaws,
-    StartMagnet,
-    ShutdownMagnet,
-    SolarLeftOn,
-    SolarLeftOff,
-    SolarRightOn,
-    SolarRightOff,
-    SetTeamColorJaune,
-    SetTeamColorBleu
+    OpenFrontRato,
+    CloseFrontRato,
+    OpenBackRato,
+    CloseBackRato,
+    StartFrontLeftMagnets,
+    StopFrontLeftMagnets,
+    StartFrontRightMagnets,
+    StopFrontRightMagnets,
+    StartBackLeftMagnets,
+    StopBackLeftMagnets,
+    StartBackRightMagnets,
+    StopBackRightMagnets,
+    RaiseFrontMagnets,
+    LowerFrontMagnets,
+    RaiseBackMagnets,
+    LowerBackMagnets
 };
 
 enum DataID : uint8_t

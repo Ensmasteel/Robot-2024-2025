@@ -181,7 +181,19 @@ void setup() {
     /* SEQUENCES */
     Sequence BrainTest(
         {
-            new MoveAction(VectorOriented(1.0f, 0.0f, 0.0f), false, false, true, true)
+            new MoveAction(VectorOriented(1.6f, 0.0f, 0.0f), false, false, true, true)
+        }
+    );
+
+    Sequence BrainBleu(
+        {
+            new MoveAction(VectorOriented(1.6f, 0.0f, 0.0f), false, false, true, true)
+        }
+    );
+
+    Sequence BrainBleu(
+        {
+            new MoveAction(VectorOriented(1.6f, 0.0f, 0.0f), false, false, true, true)
         }
     );
 
@@ -196,7 +208,7 @@ void setup() {
     threads.setMicroTimer(10);
     threads.setDefaultTimeSlice(1);
 
-    //tirrette_mut.lock();
+    tirrette_mut.lock();
 
     Logger::setup(&Serial, &Serial, &Serial, false, false, true);
 
@@ -206,9 +218,9 @@ void setup() {
     threads.addThread(threadArretUrgence);
     pinMode(PIN_ARRET_URGENCE, INPUT_PULLDOWN);
     threads.addThread(threadOdometry);
-    //threads.addThread(threadReceiveMsgESP);
+    threads.addThread(threadReceiveMsgESP);
     threads.addThread(threadCommunications);
-    //threads.addThread(threadTirette);
+    threads.addThread(threadTirette);
 
     // TODO delete unused brain
 
