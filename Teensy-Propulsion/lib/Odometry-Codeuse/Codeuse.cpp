@@ -14,6 +14,9 @@ Codeuse::Codeuse(uint8_t pinCodA, uint8_t pinCodB, int32_t tPerRound, float wDia
 void Codeuse::actuate(float dt){
     ticks=enc->read();
     deltaAvance = (ticks-oldTicks)*(PI*wheelDiameter)/ticksPerRound;
+    if (!orientation) {
+        deltaAvance = -deltaAvance;
+    }
     v = deltaAvance/dt;
     oldTicks=ticks;
 }

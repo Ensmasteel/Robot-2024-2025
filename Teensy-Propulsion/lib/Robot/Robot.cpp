@@ -11,13 +11,13 @@ Robot::Robot(float x_ini, float y_ini, float theta_ini) {
     this->motorL = Motor(PIN_LEFT_MOTOR_PWM, PIN_LEFT_MOTOR_IN1, 13, false);
     this->motorR = Motor(PIN_RIGHT_MOTOR_PWM, PIN_RIGHT_MOTOR_IN1, 13, false);
 
-    this->codeuseR = Codeuse(PIN_CODEUSE_DROITE_A, PIN_CODEUSE_DROITE_B, 8192 * (1 - SYM), 0.05688, true);
-    this->codeuseL = Codeuse(PIN_CODEUSE_GAUCHE_A, PIN_CODEUSE_GAUCHE_B, 16384 * (1 + SYM), 0.05811, true);
+    this->codeuseL = Codeuse(PIN_CODEUSE_GAUCHE_A, PIN_CODEUSE_GAUCHE_B, 8192 * (1 - SYM), 0.05827, false);
+    this->codeuseR = Codeuse(PIN_CODEUSE_DROITE_A, PIN_CODEUSE_DROITE_B, 16384 * (1 + SYM), 0.05761, true);
 
     this->switchL = Switch(PIN_SWITCH_L);
     this->switchR = Switch(PIN_SWITCH_R);
 
-    this->odometry = Odometry(&codeuseL, &codeuseR, 0.29835, &switchL, &switchR, &kineticCurrent);
+    this->odometry = Odometry(&codeuseL, &codeuseR, 0.375, &switchL, &switchR, &kineticCurrent);
 
     this->controller = Asservissement(&translationOrder, &rotationOrder, &kineticCurrent, &kineticNext, 100.0);
 
