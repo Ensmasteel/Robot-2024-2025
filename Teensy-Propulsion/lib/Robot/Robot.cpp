@@ -91,44 +91,68 @@ void Robot::updateOdometry(float dt) {
 }
 
 
-void Robot::openClaws() {
-    comMega.send(newMessageToDo(Teensy, Arduino, OpenClaws));
+void Robot::openFrontRato() {
+    comMega.send(newMessageToDo(Teensy, Arduino, OpenFrontRato));
 }
 
-void Robot::closeClaws() {
-    comMega.send(newMessageToDo(Teensy, Arduino, CloseClaws));
+void Robot::closeFrontRato() {
+    comMega.send(newMessageToDo(Teensy, Arduino, CloseFrontRato));
 }
 
-void Robot::raiseClaws() {
-    comMega.send(newMessageToDo(Teensy, Arduino, RaiseClaws));
+void Robot::openBackRato() {
+    comMega.send(newMessageToDo(Teensy, Arduino, OpenBackRato));
 }
 
-void Robot::lowerClaws() {
-    comMega.send(newMessageToDo(Teensy, Arduino, LowerClaws));
+void Robot::closeBackRato() {
+    comMega.send(newMessageToDo(Teensy, Arduino, CloseBackRato));
 }
 
-void Robot::startMagnet() {
-    comMega.send(newMessageToDo(Teensy, Arduino, StartMagnet));
+void Robot::raiseFrontMagnets() {
+    comMega.send(newMessageToDo(Teensy, Arduino, RaiseFrontMagnets));
 }
 
-void Robot::shutdownMagnet() {
-    comMega.send(newMessageToDo(Teensy, Arduino, ShutdownMagnet));
+void Robot::lowerFrontMagnets() {
+    comMega.send(newMessageToDo(Teensy, Arduino, LowerFrontMagnets));
 }
 
-void Robot::solarLeftOn() {
-    comMega.send(newMessageToDo(Teensy, Arduino, SolarLeftOn));
+void Robot::raiseBackMagnets() {
+    comMega.send(newMessageToDo(Teensy, Arduino, RaiseBackMagnets));
 }
 
-void Robot::solarLeftOff() {
-    comMega.send(newMessageToDo(Teensy, Arduino, SolarLeftOff));
+void Robot::lowerBackMagnets() {
+    comMega.send(newMessageToDo(Teensy, Arduino, LowerBackMagnets));
 }
 
-void Robot::solarRightOn() {
-    comMega.send(newMessageToDo(Teensy, Arduino, SolarRightOn));
+void Robot::startFrontLeftMagnets() {
+    comMega.send(newMessageToDo(Teensy, Arduino, StartFrontLeftMagnets));
 }
 
-void Robot::solarRightOff() {
-    comMega.send(newMessageToDo(Teensy, Arduino, SolarRightOff));
+void Robot::stopFrontLeftMagnets() {
+    comMega.send(newMessageToDo(Teensy, Arduino, StopFrontLeftMagnets));
+}
+
+void Robot::startFrontRightMagnets() {
+    comMega.send(newMessageToDo(Teensy, Arduino, StartFrontRightMagnets));
+}
+
+void Robot::stopFrontRightMagnets() {
+    comMega.send(newMessageToDo(Teensy, Arduino, StopFrontRightMagnets));
+}
+
+void Robot::startBackLeftMagnets() {
+    comMega.send(newMessageToDo(Teensy, Arduino, StartBackLeftMagnets));
+}
+
+void Robot::stopBackLeftMagnets() {
+    comMega.send(newMessageToDo(Teensy, Arduino, StopBackLeftMagnets));
+}
+
+void Robot::startBackRightMagnets() {
+    comMega.send(newMessageToDo(Teensy, Arduino, StartBackRightMagnets));
+}
+
+void Robot::stopBackRightMagnets() {
+    comMega.send(newMessageToDo(Teensy, Arduino, StopBackRightMagnets));
 }
 
 bool Robot::testTirette() {

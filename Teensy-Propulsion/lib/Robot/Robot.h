@@ -26,16 +26,22 @@ class Robot {
 
         void updateOdometry(float dt);
 
-        void openClaws();
-        void closeClaws();
-        void raiseClaws();
-        void lowerClaws();
-        void startMagnet();
-        void shutdownMagnet();
-        void solarLeftOn();
-        void solarLeftOff();
-        void solarRightOn();
-        void solarRightOff();
+        void openFrontRato();
+        void closeFrontRato();
+        void openBackRato();
+        void closeBackRato();
+        void raiseFrontMagnets();
+        void lowerFrontMagnets();
+        void raiseBackMagnets();
+        void lowerBackMagnets();
+        void startFrontLeftMagnets();
+        void stopFrontLeftMagnets();
+        void startFrontRightMagnets();
+        void stopFrontRightMagnets();
+        void startBackLeftMagnets();
+        void stopBackLeftMagnets();
+        void startBackRightMagnets();
+        void stopBackRightMagnets();
 
         bool testTirette();
 

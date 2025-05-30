@@ -49,42 +49,54 @@ StaticAction::StaticAction(actionType aid, bool noDuration):
     msstart = 0;
     if (!noDuration) {
         switch (id) {
-            case OPEN_CLAWS:
+            case OPEN_FRONT_RATO:
                 msduration = 300;
                 break;
-            case CLOSE_CLAWS:
+            case CLOSE_FRONT_RATO:
                 msduration = 300;
                 break;
-            case RAISE_CLAWS:
+            case OPEN_BACK_RATO:
+                msduration = 300;
+                break;
+            case CLOSE_BACK_RATO:
+                msduration = 300;
+                break;
+            case RAISE_FRONT_MAGNETS:
                 msduration = 800;
                 break;
-            case LOWER_CLAWS:
+            case LOWER_FRONT_MAGNETS:
                 msduration = 800;
                 break;
-            case START_MAGNET:
+            case RAISE_BACK_MAGNETS:
+                msduration = 800;
+                break;
+            case LOWER_BACK_MAGNETS:
+                msduration = 800;
+                break;
+            case START_FRONT_LEFT_MAGNETS:
                 msduration = 0;
                 break;
-
-            case SHUTDOWN_MAGNET:
+            case STOP_FRONT_LEFT_MAGNETS:
                 msduration = 0;
                 break;
-
-            case SOLAR_LEFT_ON:
-                msduration = 300;
+            case START_FRONT_RIGHT_MAGNETS:
+                msduration = 0;
                 break;
-
-            case SOLAR_LEFT_OFF:
-                msduration = 300;
+            case STOP_FRONT_RIGHT_MAGNETS:
+                msduration = 0;
                 break;
-
-            case SOLAR_RIGHT_ON:
-                msduration = 300;
+            case START_BACK_LEFT_MAGNETS:
+                msduration = 0;
                 break;
-
-            case SOLAR_RIGHT_OFF:
-                msduration = 300;
+            case STOP_BACK_LEFT_MAGNETS:
+                msduration = 0;
                 break;
-
+            case START_BACK_RIGHT_MAGNETS:
+                msduration = 0;
+                break;
+            case STOP_BACK_RIGHT_MAGNETS:
+                msduration = 0;
+                break;
             default:
                 msduration = 0;
                 break;
@@ -102,40 +114,53 @@ void StaticAction::run(float dt, Robot* robot) {
     if (!msstart) {
         msstart = millis();
         switch (id) {
-            case OPEN_CLAWS:
-                robot->openClaws();
+            case OPEN_FRONT_RATO:
+                robot->openFrontRato();
                 break;
-            case CLOSE_CLAWS:
-                robot->closeClaws();
+            case CLOSE_FRONT_RATO:
+                robot->closeFrontRato();
                 break;
-            case RAISE_CLAWS:
-                robot->raiseClaws();
+            case OPEN_BACK_RATO:
+                robot->openBackRato();
                 break;
-            case LOWER_CLAWS:
-                robot->lowerClaws();
+            case CLOSE_BACK_RATO:
+                robot->closeBackRato();
                 break;
-            case START_MAGNET:
-                robot->startMagnet();
+            case RAISE_FRONT_MAGNETS:
+                robot->raiseFrontMagnets();
                 break;
-
-            case SHUTDOWN_MAGNET:
-                robot->shutdownMagnet();
+            case LOWER_FRONT_MAGNETS:
+                robot->lowerFrontMagnets();
                 break;
-
-            case SOLAR_LEFT_ON:
-                robot->solarLeftOn();
+            case RAISE_BACK_MAGNETS:
+                robot->raiseBackMagnets();
                 break;
-
-            case SOLAR_LEFT_OFF:
-                robot->solarLeftOff();
+            case LOWER_BACK_MAGNETS:
+                robot->lowerBackMagnets();
                 break;
-
-            case SOLAR_RIGHT_ON:
-                robot->solarRightOn();
+            case START_FRONT_LEFT_MAGNETS:
+                robot->startFrontLeftMagnets();
                 break;
-
-            case SOLAR_RIGHT_OFF:
-                robot->solarRightOff();
+            case STOP_FRONT_LEFT_MAGNETS:
+                robot->stopFrontLeftMagnets();
+                break;
+            case START_FRONT_RIGHT_MAGNETS:
+                robot->startFrontRightMagnets();
+                break;
+            case STOP_FRONT_RIGHT_MAGNETS:
+                robot->stopFrontRightMagnets();
+                break;
+            case START_BACK_LEFT_MAGNETS:
+                robot->startBackLeftMagnets();
+                break;
+            case STOP_BACK_LEFT_MAGNETS:
+                robot->stopBackLeftMagnets();
+                break;
+            case START_BACK_RIGHT_MAGNETS:
+                robot->startBackRightMagnets();
+                break;
+            case STOP_BACK_RIGHT_MAGNETS:
+                robot->stopBackRightMagnets();
                 break;
 
             default:
