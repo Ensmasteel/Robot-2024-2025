@@ -105,33 +105,6 @@ void threadTirette() {
             threads.kill(threads.id());
         }
 
-        /* Handle team color changes while the tirette is not released */
-        robot->comMega.update();
-        if (robot->comMega.waitingRX()) {
-            msg = robot->comMega.peekOldestMessage();
-            switch (msg.did) {
-                case MessActuator:
-                    switch (msg.aid){
-                    case SetTeamColorJaune:
-                        brain = brain_jaune;
-                        robot->init(robotInitJaune.getX(), robotInitJaune.getY(), robotInitJaune.getTheta());
-                        robot->comESP.send(newMessageActuator(Teensy, ESP_32, SetTeamColorJaune));
-                        break;
-                    case SetTeamColorBleu:
-                        brain = brain_bleu;
-                        robot->init(robotInitBleu.getX(), robotInitBleu.getY(), robotInitBleu.getTheta());
-                        robot->comESP.send(newMessageActuator(Teensy, ESP_32, SetTeamColorBleu));
-                        break;
-                    default:
-                        break;
-                    }
-                    break;
-                default:
-                    break;
-            }
-            robot->comMega.popOldestMessage();
-        }
-
         threads.yield();
     }
 }
@@ -187,13 +160,51 @@ void setup() {
 
     Sequence BrainBleu(
         {
-            new MoveAction(VectorOriented(1.6f, 0.0f, 0.0f), false, false, true, true)
+            new StaticAction(STOP_BACK_LEFT_MAGNETS),
+            new StaticAction(STOP_BACK_RIGHT_MAGNETS),
+            new StaticAction(STOP_FRONT_LEFT_MAGNETS),
+            new StaticAction(STOP_FRONT_RIGHT_MAGNETS),
+
+            new MoveAction(VectorOriented(0.2f, 0.0f, 0.0f), false, false, true, true),
+            new MoveAction(VectorOriented(0.5f, -0.475f, 0.0f), false, false, true, true),
+
+            new MoveAction(VectorOriented(0.2f, -0.475f, 0.0f), false, true, true, true),
+            new MoveAction(VectorOriented(0.0f, -0.475f, 0.0f), false, true, true, true),
+            new MoveAction(VectorOriented(0.2f, -0.475f, 0.0f), false, false, true, true),
+
+            new MoveAction(VectorOriented(0.8f, -0.8f, 0.0f), false, false, true, true),
+            new MoveAction(VectorOriented(1.3f, -0.15f, 0.0f), false, false, true, true),
+
+            new MoveAction(VectorOriented(1.0f, -0.15f, 0.0f), false, true, true, true),
+            new MoveAction(VectorOriented(0.8f, -0.15f, 0.0f), false, true, true, true),
+
+            new MoveAction(VectorOriented(0.0f, 0.0f, 0.0f), false, true, true, true),
+            new MoveAction(VectorOriented(1.7f, -0.85f, 0.0f), false, true, true, true)
         }
     );
 
-    Sequence BrainBleu(
+    Sequence BrainJaune(
         {
-            new MoveAction(VectorOriented(1.6f, 0.0f, 0.0f), false, false, true, true)
+            new StaticAction(STOP_BACK_LEFT_MAGNETS),
+            new StaticAction(STOP_BACK_RIGHT_MAGNETS),
+            new StaticAction(STOP_FRONT_LEFT_MAGNETS),
+            new StaticAction(STOP_FRONT_RIGHT_MAGNETS),
+
+            new MoveAction(VectorOriented(0.2f, 0.0f, 0.0f), false, false, true, true),
+            new MoveAction(VectorOriented(0.5f, 0.475f, 0.0f), false, false, true, true),
+
+            new MoveAction(VectorOriented(0.2f, 0.475f, 0.0f), false, true, true, true),
+            new MoveAction(VectorOriented(0.0f, 0.475f, 0.0f), false, true, true, true),
+            new MoveAction(VectorOriented(0.2f, 0.475f, 0.0f), false, false, true, true),
+
+            new MoveAction(VectorOriented(0.8f, 0.8f, 0.0f), false, false, true, true),
+            new MoveAction(VectorOriented(1.3f, 0.15f, 0.0f), false, false, true, true),
+
+            new MoveAction(VectorOriented(1.0f, 0.15f, 0.0f), false, true, true, true),
+            new MoveAction(VectorOriented(0.8f, 0.15f, 0.0f), false, true, true, true),
+
+            new MoveAction(VectorOriented(0.0f, 0.0f, 0.0f), false, true, true, true),
+            new MoveAction(VectorOriented(1.7f, 0.85f, 0.0f), false, true, true, true)
         }
     );
 
@@ -201,7 +212,6 @@ void setup() {
     //robot = new Robot(robotInitJaune.getX(), robotInitJaune.getY(), robotInitJaune.getTheta());
     robot = new Robot(robotInitZero.getX(), robotInitZero.getY(), robotInitZero.getTheta());
     brain = new SequenceManager({BrainTest});
-    robot->comESP.send(newMessageActuator(Teensy, ESP_32, SetTeamColorBleu));
 
     /* MISC */
     MoveProfilesSetup::setup();
@@ -213,7 +223,7 @@ void setup() {
     Logger::setup(&Serial, &Serial, &Serial, false, false, true);
 
     delay(3000);
-    //threads.addThread(threadEnd);
+    threads.addThread(threadEnd);
     threads.addThread(threadSequence);
     threads.addThread(threadArretUrgence);
     pinMode(PIN_ARRET_URGENCE, INPUT_PULLDOWN);
